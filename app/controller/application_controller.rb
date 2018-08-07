@@ -12,7 +12,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    if logged_in?
+      redirect to '/ideas'
+    else
+      erb :'users/login'
+    end
+  end
 
+  post '/login' do
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session["user_id"] = @user.id
+      redirect '/ideas'
+    else
+      redirect '/login'
+    end
   end
 
   get '/logout' do
@@ -30,6 +44,17 @@ class ApplicationController < Sinatra::Base
     else
       redirect to '/signup'
     end
+  end
+
+  helpers do
+  	def logged_in?
+  		!!session[:user_id]
+  	end
+
+  	def current_user
+  		User.find(session[:user_id])
+  	end
+
   end
 
 end # ApplicationController
