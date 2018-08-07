@@ -1,4 +1,4 @@
 # logging in and out?
-class UserController
+class UserController < ApplicationController
 
 end

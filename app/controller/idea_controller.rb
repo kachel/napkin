@@ -1,5 +1,7 @@
-# CRUD!!
+class IdeaController < ApplicationController
 
-class IdeaController
+  get '/ideas' do
+    erb :'/ideas/all_ideas'
+  end
 
 end

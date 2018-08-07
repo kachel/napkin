@@ -1,2 +1,3 @@
 # napkin
-write down your million dollar idea
+
+Write down your million dollar idea!

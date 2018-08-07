@@ -24,8 +24,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if !params[:email] && !params[:username] && !params[:password]
-      @user = User.create(email: params[:email], username: params[:username], password: params[:password))
+    if !params[:email].empty? && !params[:username].empty? && !params[:password].empty?
+      @user = User.create(email: params[:email], username: params[:username], password: params[:password])
+      redirect to '/ideas'
     else
       redirect to '/signup'
     end
