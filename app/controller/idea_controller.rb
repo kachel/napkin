@@ -1,0 +1,5 @@
+# CRUD!!
+
+class IdeaController
+
+end
