@@ -37,12 +37,24 @@ class IdeaController < ApplicationController
     end
   end
 
-  get '/ideas/:id' do
+  get '/ideas/:id/edit' do
     if logged_in?
       @idea = Idea.find(params[:id])
-      erb :'/ideas/show'
+      erb :'/ideas/edit_idea'
     else
       redirect '/login'
     end
   end
-end
+
+  patch '/ideas/:id/edit' do
+    @idea = Idea.find(params[:id])
+    if !params[:project].empty?
+      @idea.project = params[:project]
+      @idea.save
+      erb :'ideas/show'
+    else
+      redirect "/ideas/#{@idea.id}/edit"
+    end
+  end
+
+end # IdeaController

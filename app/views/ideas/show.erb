@@ -1,3 +1,7 @@
 show.erb
 
 <p><%= @idea.project %></p>
+
+<form method="get" action="/ideas/<%=@idea.id%>/edit">
+    <input type="submit" value="Edit Idea">
+</form>
