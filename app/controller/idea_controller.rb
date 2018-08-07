@@ -27,4 +27,22 @@ class IdeaController < ApplicationController
       redirect '/ideas/new'
     end
   end
+
+  get '/ideas/:id' do
+    if logged_in?
+      @idea = Idea.find(params[:id])
+      erb :'/ideas/show'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/ideas/:id' do
+    if logged_in?
+      @idea = Idea.find(params[:id])
+      erb :'/ideas/show'
+    else
+      redirect '/login'
+    end
+  end
 end
