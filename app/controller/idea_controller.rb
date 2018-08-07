@@ -46,7 +46,7 @@ class IdeaController < ApplicationController
     end
   end
 
-  patch '/ideas/:id/edit' do
+  patch '/ideas/:id' do
     @idea = Idea.find(params[:id])
     if !params[:project].empty?
       @idea.project = params[:project]
