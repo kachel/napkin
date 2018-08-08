@@ -57,4 +57,18 @@ class IdeaController < ApplicationController
     end
   end
 
+  get '/ideas/:id/delete' do
+    @idea = Idea.find(params[:id])
+    if logged_in?
+      if @idea.user_id == current_user.id
+        @user = current_user
+        @idea.delete
+        @ideas = Idea.all
+        erb :'/ideas/erased'
+      end
+    else
+      redirect '/login'
+    end
+  end
+
 end # IdeaController

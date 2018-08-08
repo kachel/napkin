@@ -1,7 +1,13 @@
 show.erb
 
-<p><%= @idea.project %></p>
+<p><%= @idea.project %> saved~</p>
 
 <form method="get" action="/ideas/<%=@idea.id%>/edit">
     <input type="submit" value="Edit Idea">
 </form>
+
+<form method="get" action="/ideas/<%=@idea.id%>/delete">
+    <input type="submit" value="Delete Idea">
+</form>
+
+<a href="/ideas">See all of them in one place</a>
