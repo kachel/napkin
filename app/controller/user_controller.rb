@@ -1,4 +1,3 @@
-# logging in and out?
 class UserController < ApplicationController
 
   get '/login' do
