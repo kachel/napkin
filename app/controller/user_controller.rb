@@ -35,8 +35,13 @@ class UserController < ApplicationController
 
   post '/signup' do
     if !params[:email].empty? && !params[:username].empty? && !params[:password].empty?
-      @user = User.create(email: params[:email], username: params[:username], password: params[:password])
-      redirect to '/ideas'
+      unless User.find_by(username: params[:username])
+        @user = User.create(email: params[:email], username: params[:username], password: params[:password])
+        session["user_id"] = @user.id
+        redirect to '/ideas'
+      else
+        redirect to '/signup'
+      end
     else
       redirect to '/signup'
     end
