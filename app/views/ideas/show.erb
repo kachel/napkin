@@ -1,4 +1,12 @@
-<p><%= @idea.project %> saved~</p>
+<h2>Project Idea</h2>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<br>
+
+<li><%= @idea.project %></li><br>
 
 <form method="get" action="/ideas/<%=@idea.id%>/edit">
     <input type="submit" value="Edit Idea">

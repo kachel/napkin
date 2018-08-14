@@ -1,4 +1,6 @@
+require 'rack-flash'
 class IdeaController < ApplicationController
+  use Rack::Flash
 
   get '/ideas' do
     if logged_in?
@@ -22,6 +24,7 @@ class IdeaController < ApplicationController
   post '/ideas' do
     if !params[:project].empty?
       @idea = Idea.create(project: params[:project], user_id: current_user.id)
+      flash[:message] = "Successfully created project."
       erb :'/ideas/show'
     else
       redirect '/ideas/new'
@@ -51,6 +54,7 @@ class IdeaController < ApplicationController
     if !params[:project].empty?
       @idea.project = params[:project]
       @idea.save
+      flash[:message] = "Successfully edited project."
       erb :'ideas/show'
     else
       redirect "/ideas/#{@idea.id}/edit"
@@ -64,7 +68,8 @@ class IdeaController < ApplicationController
         @user = current_user
         @idea.delete
         @ideas = Idea.all
-        erb :'/ideas/erased'
+        flash[:message] = "Successfully deleted project."
+        erb :'/ideas/show'
       end
     else
       redirect '/login'
