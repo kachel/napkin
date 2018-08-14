@@ -1,4 +1,4 @@
-<h3>make your project awesomer</h3>
+<h3>Make your project awesomer~</h3>
 
 <form action="/ideas/<%=@idea.id%>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="patch">
@@ -6,3 +6,6 @@
   <input type="text" name="project" placeholder="<%=@idea.project%>">
   <input type="submit" value="submit">
 </form>
+
+<a href="/ideas">Back to all your projects</a>
+<p>Time to say goodbye: <a href="/logout">log out</a></p>

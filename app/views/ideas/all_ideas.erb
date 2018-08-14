@@ -1,8 +1,9 @@
-<% @ideas.each do |i| %>
-<p><%= i.project %></p>
-<% end %>
-
 <h3>Lightbulb above your head?</h3>
-<a href="/ideas/new">Save it here</a>
+<a href="/ideas/new">Save your project here</a>
+
+<h4>Your projects so far:</h4>
+<% @ideas.each do |i| %>
+<li><%= i.project %></li>
+<% end %>
 
 <p>Time to say goodbye: <a href="/logout">log out</a></p>
