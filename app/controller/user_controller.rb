@@ -40,9 +40,11 @@ class UserController < ApplicationController
         session["user_id"] = @user.id
         redirect to '/ideas'
       else
+        flash[:error] = "Womp womp. Something went wrong."
         redirect to '/signup'
       end
     else
+      flash[:error] = "Womp womp. Something went wrong."
       redirect to '/signup'
     end
   end
