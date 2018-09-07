@@ -25,7 +25,7 @@ class IdeaController < ApplicationController
     if !params[:project].empty?
       @idea = Idea.create(project: params[:project], user_id: current_user.id)
       flash[:message] = "Successfully created project."
-      erb :'/ideas/show'
+      redirect "/ideas/#{@idea.id}"
     else
       redirect '/ideas/new'
     end
@@ -52,10 +52,15 @@ class IdeaController < ApplicationController
   patch '/ideas/:id' do
     @idea = Idea.find(params[:id])
     if !params[:project].empty?
-      @idea.project = params[:project]
-      @idea.save
-      flash[:message] = "Successfully edited project."
-      erb :'ideas/show'
+      if @idea.user_id == current_user.id
+        @idea.project = params[:project]
+        @idea.save
+        flash[:message] = "Successfully edited project."
+        redirect "/ideas/#{@idea.id}"
+      else
+        flash[:message] = "That is not your project to edit!"
+        erb :'/ideas/show'
+      end
     else
       redirect "/ideas/#{@idea.id}/edit"
     end
@@ -69,6 +74,9 @@ class IdeaController < ApplicationController
         @idea.delete
         @ideas = Idea.all
         flash[:message] = "Successfully deleted project."
+        erb :'/ideas/show'
+      else
+        flash[:message] = "That is not your project!"
         erb :'/ideas/show'
       end
     else
